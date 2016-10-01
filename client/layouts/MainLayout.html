@@ -1,0 +1,18 @@
+<template name="MainLayout">
+  <head>
+      <title>voglerShop</title>
+      <style>
+          .main.container {
+              margin-top: 7em
+          }
+      </style>
+  </head>
+
+  <body>
+      {{> Nav}}
+      
+      <div class="ui main container">
+          {{> Template.dynamic template=main}}
+      </div>
+  </body>
+</template>

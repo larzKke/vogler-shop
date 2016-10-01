@@ -1,0 +1,10 @@
+<template name="newProduct">
+  <h3>Neues Produkt anlegen:</h3>
+  <div class="ui grid">
+    <div class="ten wide column">
+        <div class="ui segment">
+          {{> quickForm collection="Products" id="insertProduktForm" type="insert"}}
+        </div>
+    </div>
+  </div>
+</template>

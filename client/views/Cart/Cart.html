@@ -1,0 +1,34 @@
+<template name="Cart">
+    <h2>Warenkorb</h2>
+    {{#if items.count}}
+      <table class="ui striped table">
+      <thead>
+        <tr>
+          <th>Artikel-Nr.</th>
+          <th>Name</th>
+          <th>Preis</th>
+          <th>Menge</th>
+          <th>Gesamt</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each items}}
+          {{> CartItem}}
+        {{/each}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th><strong>Total:</strong></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><strong>{{itemTotal}}</strong></th>
+          <th></th>
+        </tr>
+      </tfoot>
+    </table>
+  {{else}}
+    <div class="ui red message">Warenkorb leer</div>
+  {{/if}}
+</template>

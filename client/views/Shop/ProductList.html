@@ -1,0 +1,15 @@
+<template name="ProductList">
+  <div class="ui divided items">
+    {{#if Template.subscriptionsReady}}
+      {{#if products.count}}
+        {{#each products}}
+          {{> Product this}}
+        {{/each}}
+      {{else}}
+        <div class="ui red message">keine Produkte im Lager</div>
+      {{/if}}
+    {{else}}
+      <div class="ui active inline loader"></div>
+    {{/if}}
+  </div>
+</template>

@@ -1,0 +1,28 @@
+<template name="Product">
+  <div class="item">
+    <div class="image">
+      <img src="/images/{{image}}.jpg">
+    </div>
+    <div class="content">
+      <div class="container right floated">
+        <div class="ui action input">
+          <input type="number" value="1" name="itemAmount" class="itemAmount">
+          <button class="ui teal right labeled icon button add-item">
+            <i class="cart icon"></i>
+            in Warenkorb
+          </button>
+        </div>
+      </div>
+      <p class="header">{{name}}</p>
+      <div class="meta">
+        <span class="cinema"></span>
+      </div>
+      <div class="description">
+        <p>{{desc}}</p>
+      </div>
+      <div class="extra">
+        <div class="ui label">{{price}}€/kg</div>
+      </div>
+    </div>
+  </div>
+</template>
