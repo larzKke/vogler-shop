@@ -4,7 +4,7 @@ Session.setDefault('Cart-itemCount', 0);
 Session.setDefault('Cart-itemTotal', 0);
 
 Tracker.autorun(function () {
-  Meteor.subscribe('cartItems');
+  Meteor.subscribe('cartitems');
 
   var query = {};
   query.userId = Meteor.userId();
@@ -16,22 +16,4 @@ Tracker.autorun(function () {
   });
   Session.set('Cart-itemTotal', Math.floor(total*100)/100);
   Session.set('Cart-itemCount', items.count());
-});
-
-
-Template.Cart.onCreated(function(){
-  var self = this;
-  self.autorun(function(){
-    self.subscribe('cartItems');
-  });
-});
-
-Template.Cart.helpers({
-    items: () => {
-      return cartItems.find({});
-    },
-    itemTotal: () => {
-      let total = Session.get('Cart-itemTotal');
-      return total.toFixed(2);
-    }
 });

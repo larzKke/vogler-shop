@@ -4,7 +4,7 @@ Template.Admin.onCreated(function () {
       FlowRouter.go('login');
     }
     if (!Roles.userIsInRole( Meteor.userId(), 'admin' )) {
-      Bert.alert( 'Sie müssen für diese Seite Admin sein!', 'danger', 'fixed-top' );
+      Bert.alert( 'Sie müssen für diese Seite Admin sein!', 'danger', 'fixed-bottom' );
       FlowRouter.go('home');
     }
   });
@@ -16,6 +16,7 @@ Template.ProductListAdmin.onCreated(function(){
   self.autorun(function(){
     self.subscribe('products');
   });
+
 });
 
 Template.ProductListAdmin.helpers({
@@ -26,7 +27,17 @@ Template.ProductListAdmin.helpers({
 
 Template.ProductListAdmin.events({
     'click .delete': function() {
-        Products.remove({_id: this._id});
+      // let product = Products.remove({_id: this._id});
+      let product = this;
+      Meteor.call('removeProduct', product, function(err, res){
+        if (err) {
+          Bert.alert( 'Sie müssen Admin sein um Produkte zu löschen!', 'danger', 'fixed-bottom' );
+        } else {
+          console.log(res);
+          Bert.alert( 'Product wurde erfolgreich entfernt!', 'success', 'fixed-bottom' );
+        }
+
+      });
     }
 })
 

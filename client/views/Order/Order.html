@@ -1,0 +1,22 @@
+<template name="Order">
+    <div class="ui two column grid">
+      <div class="column">
+        <h3>Lieferadresse:</h3>
+        {{> quickForm id="deliverAdress" schema=DeliverAdressSchema class="ui form segment" buttonContent=false}}
+      </div>
+      <div class="column">
+          <h3>Rechnungsadresse:</h3>
+          {{> quickForm id="invoiceAdress" schema=InvoiceAdressSchema class="ui form segment" buttonContent=false}}
+        </div>
+      </div>
+    <div class="ui one column grid">
+      <div class="column">
+        {{> CartItemList}}
+      </div>
+    </div>
+    <div class="ui one column grid">
+      <div class="column">
+        {{#if btnOff}}<a href="#"><button class="ui button green right floated orderNow">Bestellen</button></a>{{/if}}
+      </div>
+    </div>
+</template>

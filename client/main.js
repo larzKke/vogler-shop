@@ -3,7 +3,7 @@ Meteor.startup(() => {
 
     AutoForm.addHooks(['updateProductForm'], {
       onSuccess: function(operation, result, template) {
-        Bert.alert( 'Produkt gespeichert', 'success', 'fixed-top' );
+        Bert.alert( 'Produkt gespeichert', 'success', 'fixed-bottom' );
         FlowRouter.go("/admin");
       }
     });

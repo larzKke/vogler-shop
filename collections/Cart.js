@@ -1,5 +1,5 @@
 
-cartItems = new Mongo.Collection('cartItems');
+cartItems = new Mongo.Collection('cartitems');
 
 cartItems.allow({
   insert: function(userId, doc) {

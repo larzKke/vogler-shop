@@ -1,28 +1,37 @@
 <template name="Product">
-  <div class="item">
-    <div class="image">
-      <img src="/images/{{image}}.jpg">
-    </div>
-    <div class="content">
-      <div class="container right floated">
-        <div class="ui action input">
-          <input type="number" value="1" name="itemAmount" class="itemAmount">
-          <button class="ui teal right labeled icon button add-item">
-            <i class="cart icon"></i>
-            in Warenkorb
-          </button>
+  {{#if Template.subscriptionsReady}}
+    <div class="item">
+      <div class="image">
+        <img src="{{image}}">
+      </div>
+      <div class="content">
+        <div class="container right floated">
+          <div class="ui action input">
+            <select name="itemAmount" class="ui dropdown itemAmount">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <!-- <input type="number" value="1" name="itemAmount" class="itemAmount"> -->
+            <button class="ui teal right labeled icon button add-item">
+              <i class="cart icon"></i>
+              in Warenkorb
+            </button>
+          </div>
+        </div>
+        <p class="header">{{name}}</p>
+        <div class="meta">
+          <span class="cinema"></span>
+        </div>
+        <div class="description">
+          <p>{{desc}}</p>
+        </div>
+        <div class="extra">
+          <div class="ui label">{{price}}€/kg</div>
         </div>
       </div>
-      <p class="header">{{name}}</p>
-      <div class="meta">
-        <span class="cinema"></span>
-      </div>
-      <div class="description">
-        <p>{{desc}}</p>
-      </div>
-      <div class="extra">
-        <div class="ui label">{{price}}€/kg</div>
-      </div>
     </div>
-  </div>
+  {{/if}}
 </template>
