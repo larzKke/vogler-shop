@@ -20,28 +20,31 @@ Template.Product.helpers({
 });
 
 Template.Product.onRendered(function(){
-  this.$('.itemAmount').dropdown();
+  this.$('.itemQuantity').dropdown();
 });
 
 Template.Product.events({
 	'click .add-item':function(event, template){
 		event.preventDefault();
 
-    // template.find('.itemAmount').value = 1;
+    // template.find('.itemQuantity').value = 1;
 
 		//TODO - need to take an attribute hash and send in all values
-		var item = this;
-    var amountInput = template.find('.itemAmount')
-    item.amount =  Number(template.find('.itemAmount select').value);
-    var productInCart = cartItems.findOne({productId: item._id});
+		let item = this;
+    let quantityInput = template.find('.itemQuantity')
+    item.quantity =  Number(template.find('.itemQuantity select').value);
+    let productInCart = cartItems.findOne({productID: item._id});
 
     if (productInCart){
       Meteor.call('updateItemCart', item, productInCart, function(err,res){
         if (err) {
           console.log(err)
-        } else {
+          FlowRouter.go('login');
+          Bert.alert( 'Sie müssen eingeloggt sein um Produkte in den Warenkorb zu legen!', 'danger', 'fixed-bottom' );
+        }
+        if (res) {
           Bert.alert( 'Produkt wurde hinzugefügt!', 'success', 'fixed-bottom' );
-          $(amountInput).dropdown('restore defaults');
+          $(quantityInput).dropdown('restore defaults');
         }
       });
 
@@ -50,14 +53,14 @@ Template.Product.events({
       Meteor.call('itemToCart', item, function(err, res){
         if (err) {
           console.log(err);
-        } else {
+          FlowRouter.go('login');
+          Bert.alert( 'Sie müssen eingeloggt sein um Produkte in den Warenkorb zu legen!', 'danger', 'fixed-bottom' );
+        }
+        if (res) {
             Bert.alert( 'Produkt wurde hinzugefügt!', 'success', 'fixed-bottom' );
-            $(amountInput).dropdown('restore defaults');
+            $(quantityInput).dropdown('restore defaults');
         }
       });
     }
-	},
-  'click .button': function(e, t) {
-    console.log(t.Picture);
-  }
+	}
 });

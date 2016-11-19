@@ -1,4 +1,9 @@
 Meteor.startup(() => {
+
+    Template.registerHelper('formatDate', function(date) {
+      return moment(date).locale('de').format('LL');
+    });
+
     AutoForm.setDefaultTemplate("semanticUI");
 
     AutoForm.addHooks(['updateProductForm'], {

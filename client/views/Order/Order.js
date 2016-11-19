@@ -13,6 +13,9 @@ Template.Order.helpers({
       }
       return true
     },
+    Loading: () => {
+      return Session.get('loading');
+    },
     InvoiceAdressSchema: () => {
       return InvoiceAdressSchema
     },
@@ -24,8 +27,10 @@ Template.Order.helpers({
 Template.Order.events({
   'click .orderNow': function (event, template) {
 
-    var deliverValid = AutoForm.validateForm('deliverAdress');
-    var invoiceValid = AutoForm.validateForm('invoiceAdress');
+    Session.set('loading', true);
+
+    let deliverValid = AutoForm.validateForm('deliverAdress');
+    let invoiceValid = AutoForm.validateForm('invoiceAdress');
 
     if (deliverValid && invoiceValid) {
 
@@ -44,8 +49,8 @@ Template.Order.events({
         if (err) {
           Bert.alert( 'Ein Fehler ist aufgetreten!', 'danger', 'fixed-bottom' );
         } else {
-          console.log(res);
           FlowRouter.go('thanks');
+          Session.set('loading', false);
         }
       });
     } else {

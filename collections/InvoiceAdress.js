@@ -1,21 +1,21 @@
 InvoiceAdressSchema = new SimpleSchema({
-    FirstName: {
+    firstName: {
         type: String,
         label: 'Vorname'
     },
-    LastName: {
+    lastName: {
         type: String,
         label: 'Nachname'
     },
-    StreetNo: {
+    streetNo: {
         type: String,
         label: 'Straße + Nr.'
     },
-    Plz: {
+    plz: {
         type: Number,
         label: 'PLZ'
     },
-    Ort: {
+    city: {
         type: String,
         label: 'Ort'
     },

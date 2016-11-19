@@ -1,3 +1,19 @@
 body {
-    background-color: red;
+    // background-color: red;
+}
+
+.decr-quantity, .incr-quantity {
+  color: #ccc;
+}
+
+.decr-quantity:hover, .incr-quantity:hover {
+  cursor: pointer;
+}
+
+.incr-quantity:hover {
+  color: #21ba45;
+}
+
+.decr-quantity:hover {
+  color: #db2828;
 }

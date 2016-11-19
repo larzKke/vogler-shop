@@ -1,10 +1,10 @@
 <template name="CartItem">
   <tr>
-    <td>{{artikelNr}}</td>
-    <td>{{name}}</td>
+    <td>{{shopID}}</td>
+    <td class="eight wide">{{name}}</td>
     <td>{{price}}</td>
-    <td>{{amount}}</td>
+    <td><i class="minus mini icon decr-quantity"></i>&nbsp;{{quantity}}&nbsp;&nbsp;<i class="plus mini icon incr-quantity"></i></td>
     <td>{{itemSubTotal}}</td>
-    <td>{{#if btnOff}}<button class="ui red button delete tiny">Löschen</button>{{/if}}</td>
+    <td class="one wide">{{#if btnOff}}<button class="ui icon button red"><i class="trash outline icon"></i></button>{{/if}}</td>
   </tr>
 </template>

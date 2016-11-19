@@ -1,4 +1,7 @@
 <template name="Order">
+  {{#if Loading}}
+      <div class="ui active inline loader"></div>
+  {{else}}
     <div class="ui two column grid">
       <div class="column">
         <h3>Lieferadresse:</h3>
@@ -19,4 +22,5 @@
         {{#if btnOff}}<a href="#"><button class="ui button green right floated orderNow">Bestellen</button></a>{{/if}}
       </div>
     </div>
+  {{/if}}
 </template>

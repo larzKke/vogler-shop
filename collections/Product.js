@@ -29,7 +29,7 @@ Products.allow({
 });
 
 ProductSchema = new SimpleSchema({
-    artikelNr: {
+    shopID: {
         type: String,
         label: 'Artikel-Nr.'
     },

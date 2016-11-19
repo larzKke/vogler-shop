@@ -32,7 +32,8 @@ Template.ProductListAdmin.events({
       Meteor.call('removeProduct', product, function(err, res){
         if (err) {
           Bert.alert( 'Sie müssen Admin sein um Produkte zu löschen!', 'danger', 'fixed-bottom' );
-        } else {
+        }
+        if (res) {
           console.log(res);
           Bert.alert( 'Product wurde erfolgreich entfernt!', 'success', 'fixed-bottom' );
         }

@@ -13,13 +13,11 @@
           {{/if}}
           <div class="right menu">
               {{#if currentUser}}
-                <div class="item">
-                  <i class="user icon"></i><span>{{user.profile.name}}</span>
-                </div>
+                  <a href="/account" class="item"><i class="user icon"></i><span>{{user.profile.name}}</span></a>
               {{/if}}
-              <div class="item">
-                  <a href="/cart" class="ui button">Warenkorb {{#if itemCount}}({{itemCount}}){{/if}}</a>
-              </div>
+              <a href="/cart" class="item">
+                <i class="shop icon"></i>Warenkorb {{#if itemCount}}({{itemCount}}){{/if}}
+              </a>
               <div class="item">
                   {{#if currentUser}}
                     <a href="/home" class="ui button red logout">Logout</a>
