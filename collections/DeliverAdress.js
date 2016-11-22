@@ -25,3 +25,5 @@ DeliverAdressSchema = new SimpleSchema({
 
 DeliverAdressSchema.messages({required: "[label] bitte ausfüllen"});
 DeliverAdressSchema.messages({maxNumber: "[label] darf nicht größer 10 sein"});
+
+export default DeliverAdressSchema

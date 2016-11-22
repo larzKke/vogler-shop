@@ -10,16 +10,16 @@
       <div class="column">
           <h3>Rechnungsadresse:</h3>
           {{> quickForm id="invoiceAdress" schema=InvoiceAdressSchema class="ui form segment" buttonContent=false}}
-        </div>
-      </div>
-    <div class="ui one column grid">
-      <div class="column">
-        {{> CartItemList}}
       </div>
     </div>
     <div class="ui one column grid">
       <div class="column">
-        {{#if btnOff}}<a href="#"><button class="ui button green right floated orderNow">Bestellen</button></a>{{/if}}
+        {{> OrderList}}
+      </div>
+    </div>
+    <div class="ui one column grid">
+      <div class="column">
+        <a href="#"><button class="ui button green right floated orderNow">Bestellen</button></a>
       </div>
     </div>
   {{/if}}

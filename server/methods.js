@@ -1,19 +1,89 @@
 Meteor.methods({
-  itemToCart: function (item) {
+
+  updateItemCart: function (item) {
     if (!Meteor.userId()) {
       throw new Meteor.Error(401, 'not logged in');
     }
-    if(item._id){
-      item.productID = item._id;
-      delete item._id;
+
+    let user = Meteor.userId();
+
+    let cartItem = {
+      productID: item._id,
+      shopID: item.shopID,
+      name: item.name,
+      price: item.price,
+      userID: Meteor.userId(),
+      quantity: item.quantity
     }
-    item.userID = Meteor.userId();
-      return cartItems.insert(item);
+
+    // check if cart already exists
+    let cartExist = Carts.findOne({userID: user});
+
+    if (cartExist) {
+
+        // check if product exists in cart
+        let productExist = Carts.findOne({
+          cartItems: {
+            $elemMatch: {productID: item._id}
+          }
+        });
+
+        if (productExist) {
+          return Carts.update({_id: productExist._id, 'cartItems.productID': item._id},{
+            $inc: {'cartItems.$.quantity' : item.quantity}
+          });
+        } else {
+          return Carts.update({userID: user},{
+            $push: {cartItems: cartItem}
+          })
+        }
+
+    } else {
+      let cartItems = [cartItem];
+      return Carts.insert({
+        userID: user,
+        cartItems: cartItems
+      })
+    }
   },
 
-  updateItemCart: function (item, productInCart) {
-    return cartItems.update({_id : productInCart._id},{$inc: {quantity : item.quantity}});
+  prepareOrder: function() {
+    if (!Meteor.userId()) {
+      throw new Meteor.Error(401, 'not logged in');
+    }
+    let cart = Carts.findOne({});
+    let user = Meteor.userId();
+
+    let forwarderDHL = {
+          shopID: 'dhl123',
+          name: 'DHL',
+          price: 3.99,
+          productID: '1234',
+          quantity: 1,
+          userID: user
+    }
+
+    let forwarderDPD = {
+          shopID: 'dpd123',
+          name: 'DPD',
+          price: 9.99,
+          productID: '5678',
+          quantity: 1,
+          userID: user
+    }
+
+    if (cart.cartItems.length < 2) {
+      return Carts.update({userID: user},{
+          $set: { forwarder: forwarderDHL }
+      });
+    } else {
+      return Carts.update({userID: user},{
+          $set: { forwarder: forwarderDPD }
+      });
+    }
+
   },
+
 
   placeOrder: function (deliverAdress, invoiceAdress) {
     if (!Meteor.userId()) {
@@ -63,6 +133,17 @@ Meteor.methods({
     } else {
         throw new Meteor.Error(500, 'ERR!');
     }
+  },
+
+  incrQuantity: function (item) {
+    return Carts.update({'cartItems.productID': item.productID},{$inc: {'cartItems.$.quantity':1}})
+  },
+
+  decrQuantity: function (item) {
+    if (item.quantity == 1) {
+      Carts.update({'cartItems.productID': item.productID},{$pull: {cartItems: item}});
+    }
+    return Carts.update({'cartItems.productID': item.productID},{$inc: {'cartItems.$.quantity':-1}})
   }
 
 })

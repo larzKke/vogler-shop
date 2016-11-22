@@ -6,7 +6,7 @@ Template.Account.onCreated(function(){
 });
 
 Template.Account.helpers({
-    orders: () => {
+    orders() {
         return Orders.find({});
     }
 });

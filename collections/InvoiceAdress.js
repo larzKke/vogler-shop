@@ -22,3 +22,5 @@ InvoiceAdressSchema = new SimpleSchema({
 });
 
 InvoiceAdressSchema.messages({required: "[label] bitte ausfüllen"});
+
+export default InvoiceAdressSchema

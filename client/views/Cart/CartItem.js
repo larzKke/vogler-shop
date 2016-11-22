@@ -2,29 +2,31 @@ Template.CartItem.helpers({
   itemSubTotal: function() {
     let subTotal = this.price * this.quantity
     return subTotal.toFixed(2);
-  },
-  btnOff: () => {
-    if (FlowRouter.getRouteName() === 'order') {
-      return false
-    }
-    if (FlowRouter.getRouteName() === 'cart') {
-      return true
-    }
   }
 });
 
 
 Template.CartItem.events({
     'click .delete': function() {
-        cartItems.remove({_id: this._id});
+        let cart = Carts.findOne({});
+        Carts.update({_id: cart._id},{$pull: {cartItems: this}});
     },
     'click .incr-quantity': function() {
-        cartItems.update({_id: this._id},{$inc: {quantity:1}})
+        let item = this;
+        Meteor.call('incrQuantity', item, function(err,res){
+          if (err) {
+            console.log(err);
+            Bert.alert( 'Ein Fehler ist aufgetreten!', 'danger', 'fixed-bottom' );
+          }
+        });
+
     },
     'click .decr-quantity': function() {
-        if(this.quantity == 1) {
-          cartItems.remove({_id: this._id});
-        }
-        cartItems.update({_id: this._id},{$inc: {quantity:-1}})
+        let item = this;
+        Meteor.call('decrQuantity', item, function(err,res){
+          if (err) {
+            Bert.alert( 'Ein Fehler ist aufgetreten!', 'danger', 'fixed-bottom' );
+          }
+        });
     }
 })

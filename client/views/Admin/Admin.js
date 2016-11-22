@@ -20,7 +20,7 @@ Template.ProductListAdmin.onCreated(function(){
 });
 
 Template.ProductListAdmin.helpers({
-    products: () => {
+    products() {
         return Products.find({});
     }
 });
@@ -53,7 +53,7 @@ Template.ProductSingle.onCreated(function(){
 });
 
 Template.ProductSingle.helpers({
-    product: () => {
+    product() {
         var id = FlowRouter.getParam('id');
         return Products.findOne({ _id: id });
     }

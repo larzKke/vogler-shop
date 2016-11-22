@@ -1,34 +1,38 @@
 <template name="CartItemList">
-  {{#if items.count}}
-    <table class="ui striped table">
-    <thead>
-      <tr>
-        <th>Artikel-Nr.</th>
-        <th>Name</th>
-        <th>Preis</th>
-        <th>Menge</th>
-        <th>Gesamt</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-        {{#each items}}
-          {{> CartItem}}
-        {{/each}}
-      </tbody>
-      <tfoot>
-        <tr>
-          <th><strong>Total:</strong></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th><strong>{{itemTotal}}</strong></th>
-          <th></th>
-        </tr>
-      </tfoot>
-    </table>
-    {{#if items.count}}{{#if btnOff}}<a href="/order"><button class="ui button green right floated">Bestellen</button></a>{{/if}}{{/if}}
+  {{#if Template.subscriptionsReady}}
+      {{#if cart.cartItems}}
+        <table class="ui striped table">
+        <thead>
+          <tr>
+            <th>Artikel-Nr.</th>
+            <th>Name</th>
+            <th>Preis</th>
+            <th>Menge</th>
+            <th>Gesamt</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            {{#each cart.cartItems}}
+              {{> CartItem}}
+            {{/each}}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th><strong>Total:</strong></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th><strong>{{itemTotal}}</strong></th>
+              <th></th>
+            </tr>
+          </tfoot>
+        </table>
+        <button class="ui button green right floated prepareOrder {{#if Loading}}loading{{/if}} ">Zur Kasse</button>
+      {{else}}
+        <div class="ui red message">Warenkorb ist leer</div>
+      {{/if}}
   {{else}}
-    <div class="ui red message">Warenkorb ist leer</div>
+    <div class="ui active inline loader"></div>
   {{/if}}
 </template>

@@ -1,19 +1,21 @@
-import cartItems from '../../../collections/CartItem';
+import cartItems from '../../../collections/Cart';
 
 Session.setDefault('Cart-itemCount', 0);
 Session.setDefault('Cart-itemTotal', 0);
 
+
 Tracker.autorun(function () {
-  Meteor.subscribe('cartItems');
+  Meteor.subscribe('carts'); // TODO: GLOBAL -> LOCAL
 
-  var query = {};
-  query.userID = Meteor.userId();
-
-  var total = 0;
-  var items = cartItems.find(query, {fields: {price: 1, quantity: 1}});
-  items.forEach(function(item){
-    total += (item.price * item.quantity);
-  });
-  Session.set('Cart-itemTotal', Math.floor(total*100)/100);
-  Session.set('Cart-itemCount', items.count());
+  let cart = Carts.findOne({});
+  if (cart) {
+    let total = 0;
+    let cartItems = cart.cartItems;
+    // console.log(cartItems.count())
+    cartItems.forEach(function(item){
+      total += (item.price * item.quantity);
+    });
+    Session.set('Cart-itemTotal', Math.floor(total*100)/100);
+    Session.set('Cart-itemCount', cartItems.length);
+  }
 });

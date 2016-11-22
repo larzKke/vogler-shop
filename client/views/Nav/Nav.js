@@ -1,8 +1,8 @@
 Template.Nav.helpers({
-  user: function() {
+  user() {
     return Meteor.user();;
   },
-  itemCount: () => {
+  itemCount() {
     return Session.get('Cart-itemCount');
   }
 });

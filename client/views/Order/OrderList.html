@@ -1,0 +1,52 @@
+<template name="OrderList">
+  <table class="ui striped table">
+    <thead>
+      <tr>
+        <th>Artikel-Nr.</th>
+        <th>Name</th>
+        <th>Preis</th>
+        <th>Menge</th>
+        <th>Gesamt</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        {{#each cart.cartItems}}
+          <tr>
+            <td>{{shopID}}</td>
+            <td class="eight wide">{{name}}</td>
+            <td>{{price}}</td>
+            <td>{{quantity}}</td>
+            <td>{{itemSubTotal}}</td>
+            <td class="one wide"></td>
+          </tr>
+        {{/each}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>{{cart.forwarder.name}}</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>{{cart.forwarder.price}}</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th><strong>Total:</strong></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><strong>{{total}}</strong></th>
+          <th></th>
+        </tr>
+      </tfoot>
+  </table>
+</template>

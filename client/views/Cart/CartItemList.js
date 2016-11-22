@@ -1,24 +1,34 @@
 Template.CartItemList.onCreated(function(){
   var self = this;
   self.autorun(function(){
-    self.subscribe('cartItems');
+    self.subscribe('carts');
   });
 });
 
 Template.CartItemList.helpers({
-    items: () => {
-      return cartItems.find({});
+    cart() {
+      return Carts.findOne({});
     },
-    itemTotal: () => {
+    itemTotal() {
       let total = Session.get('Cart-itemTotal');
       return total.toFixed(2);
     },
-    btnOff: () => {
-      if (FlowRouter.getRouteName() === 'order') {
-        return false
-      }
-      if (FlowRouter.getRouteName() === 'cart') {
-        return true
-      }
+    Loading() {
+      return Session.get('loading');
     }
 });
+
+Template.CartItemList.events({
+  'click .prepareOrder': function(){
+    Session.set('loading', true);
+    Meteor.call('prepareOrder', function(err,res) {
+      if (err) {
+        Bert.alert( 'Ein Fehler ist aufgetreten!', 'danger', 'fixed-bottom' );
+      }
+      if (res) {
+        FlowRouter.go('order');
+        Session.set('loading', false);
+      }
+    })
+  }
+})

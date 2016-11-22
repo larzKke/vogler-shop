@@ -1,6 +1,6 @@
-import '/collections/DeliverAdress.js';
-import '/collections/InvoiceAdress.js';
-import '/collections/CartItem.js';
+import DeliverAdressSchema from '/collections/DeliverAdress.js';
+import InvoiceAdressSchema from '/collections/InvoiceAdress.js';
+import cartItems from '/collections/CartItem.js';
 
 Orders = new Mongo.Collection('orders');
 

@@ -6,20 +6,20 @@
 // });
 
 Template.Order.helpers({
-    btnOff: () => {
+    btnOff() {
       itemsInCart = Session.get('Cart-itemCount');
       if (itemsInCart == 0) {
         return false
       }
       return true
     },
-    Loading: () => {
+    Loading() {
       return Session.get('loading');
     },
-    InvoiceAdressSchema: () => {
+    InvoiceAdressSchema() {
       return InvoiceAdressSchema
     },
-    DeliverAdressSchema: () => {
+    DeliverAdressSchema() {
       return DeliverAdressSchema
     }
 });

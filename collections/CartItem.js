@@ -1,17 +1,3 @@
-cartItems = new Mongo.Collection('cartItems');
-
-cartItems.allow({
-  insert: function(userId, doc) {
-    return !!userId;
-  },
-  update: function(userId, doc) {
-    return !!userId;
-  },
-  remove: function(userId, doc) {
-    return !!userId;
-  }
-});
-
 cartItemSchema = new SimpleSchema({
   shopID: {
     type: String,
@@ -32,7 +18,8 @@ cartItemSchema = new SimpleSchema({
   },
   quantity: {
     type: Number,
-    label: 'Menge'
+    label: 'Menge',
+    optional: true
   },
   userID: {
     type: String,
@@ -40,6 +27,4 @@ cartItemSchema = new SimpleSchema({
   }
 });
 
-cartItems.attachSchema(cartItemSchema);
-
-export default cartItems;
+export default cartItemSchema;
