@@ -21,6 +21,11 @@ cartItemSchema = new SimpleSchema({
     label: 'Menge',
     optional: true
   },
+  weight: {
+    type: Number,
+    label: 'Gewicht',
+    optional: true
+  },
   userID: {
     type: String,
     label: 'User'

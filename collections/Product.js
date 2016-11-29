@@ -46,6 +46,11 @@ ProductSchema = new SimpleSchema({
         decimal: true,
         label: 'Preis'
     },
+    weight: {
+        type: Number,
+        decimal: true,
+        label: 'Gewicht'
+    },
     picture: {
       type: String,
       autoform: {

@@ -7,9 +7,9 @@ Meteor.startup(() => {
 
     AutoForm.setDefaultTemplate("semanticUI");
 
-    AutoForm.addHooks(['updateProductForm'], {
+    AutoForm.addHooks(['updateProductForm','updateForwarderForm'], {
       onSuccess: function(operation, result, template) {
-        Bert.alert( 'Produkt gespeichert', 'success', 'fixed-bottom' );
+        Bert.alert( 'Änderung gespeichert!', 'success', 'fixed-bottom' );
         FlowRouter.go("/admin");
       }
     });

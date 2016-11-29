@@ -16,7 +16,6 @@ Template.ProductListAdmin.onCreated(function(){
   self.autorun(function(){
     self.subscribe('products');
   });
-
 });
 
 Template.ProductListAdmin.helpers({
@@ -56,5 +55,38 @@ Template.ProductSingle.helpers({
     product() {
         var id = FlowRouter.getParam('id');
         return Products.findOne({ _id: id });
+    }
+});
+
+
+
+// ForwarderList
+Template.ForwarderListAdmin.onCreated(function(){
+  var self = this;
+  self.autorun(function(){
+    self.subscribe('forwarders');
+  });
+});
+
+Template.ForwarderListAdmin.helpers({
+    forwarder() {
+        return Forwarders.find({});
+    }
+});
+
+
+// ForwarderSingle
+Template.ForwarderSingle.onCreated(function(){
+  var self = this;
+  self.autorun(function(){
+    var id = FlowRouter.getParam('id');
+    self.subscribe('singleForwarder', id);
+  });
+});
+
+Template.ForwarderSingle.helpers({
+    forwarder() {
+        var id = FlowRouter.getParam('id');
+        return Forwarders.findOne({ _id: id });
     }
 });

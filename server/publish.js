@@ -22,3 +22,12 @@ Meteor.publish('singleProduct', function(id) {
 Meteor.publish('images', function () {
   return Images.find({}).cursor;
 });
+
+Meteor.publish('forwarders', function () {
+  return Forwarders.find({});
+});
+
+Meteor.publish('singleForwarder', function(id) {
+    check(id, String);
+    return Forwarders.find({_id: id});
+});

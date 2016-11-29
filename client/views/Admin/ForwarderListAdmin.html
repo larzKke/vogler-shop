@@ -1,31 +1,33 @@
-<template name="ProductListAdmin">
-    <h3>Lagerware:</h3>
+<template name="ForwarderListAdmin">
+    <h3>Versandarten:</h3>
     {{#if Template.subscriptionsReady}}
-      {{#if products.count}}
+      {{#if forwarder.count}}
         <table class="ui striped table">
         <thead>
           <tr>
             <th>Artikel-Nr.</th>
             <th>Name</th>
             <th>Preis</th>
-            <th>Gewicht (kg)</th>
+            <th>Min. Gewicht</th>
+            <th>Max. Gewicht</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {{#each products}}
+          {{#each forwarder}}
           <tr>
             <td>{{shopID}}</td>
             <td>{{name}}</td>
             <td>{{price}}</td>
-            <td>{{weight}}</td>
-            <td><button class="ui red button delete">Löschen</button><a href="/product/{{_id}}"><button class="ui blue button edit">Bearbeiten</button></a></td>
+            <td>{{minWeight}}</td>
+            <td>{{maxWeight}}</td>
+            <td><button class="ui red button delete">Löschen</button><a href="/forwarder/{{_id}}"><button class="ui blue button edit">Bearbeiten</button></a></td>
           </tr>
           {{/each}}
         </tbody>
       </table>
     {{else}}
-      <div class="ui red message">keine Produkte im Lager</div>
+      <div class="ui red message">keine Versandart vorhanden</div>
     {{/if}}
   {{else}}
     <div class="ui active inline loader"></div>

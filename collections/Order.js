@@ -1,5 +1,6 @@
 import DeliverAdressSchema from '/collections/DeliverAdress.js';
 import InvoiceAdressSchema from '/collections/InvoiceAdress.js';
+import ForwarderSchema from '/collections/Forwarder.js';
 import cartItems from '/collections/CartItem.js';
 
 Orders = new Mongo.Collection('orders');
@@ -38,6 +39,9 @@ OrderSchema = new SimpleSchema({
       type: Number,
       label: 'Summe',
       decimal: true
+    },
+    forwarder: {
+      type: ForwarderSchema
     },
     date: {
       type: Date,

@@ -12,6 +12,7 @@ Meteor.methods({
       shopID: item.shopID,
       name: item.name,
       price: item.price,
+      weight: item.weight,
       userID: Meteor.userId(),
       quantity: item.quantity
     }
@@ -47,44 +48,6 @@ Meteor.methods({
     }
   },
 
-  prepareOrder: function() {
-    if (!Meteor.userId()) {
-      throw new Meteor.Error(401, 'not logged in');
-    }
-    let cart = Carts.findOne({});
-    let user = Meteor.userId();
-
-    let forwarderDHL = {
-          shopID: 'dhl123',
-          name: 'DHL',
-          price: 3.99,
-          productID: '1234',
-          quantity: 1,
-          userID: user
-    }
-
-    let forwarderDPD = {
-          shopID: 'dpd123',
-          name: 'DPD',
-          price: 9.99,
-          productID: '5678',
-          quantity: 1,
-          userID: user
-    }
-
-    if (cart.cartItems.length < 2) {
-      return Carts.update({userID: user},{
-          $set: { forwarder: forwarderDHL }
-      });
-    } else {
-      return Carts.update({userID: user},{
-          $set: { forwarder: forwarderDPD }
-      });
-    }
-
-  },
-
-
   placeOrder: function (deliverAdress, invoiceAdress) {
     if (!Meteor.userId()) {
       throw new Meteor.Error(401, 'not logged in');
@@ -92,30 +55,32 @@ Meteor.methods({
 
     let user = Meteor.userId();
     let total = 0;
+    let weightTotal = 0;
     let order = {};
     let products = [];
-    let itemsToOrder = cartItems.find({userID: user});
-
+    let cart = Carts.findOne({userID: user});
+    let cartItems = cart.cartItems;
 
     order.deliverAdress = deliverAdress;
     order.invoiceAdress = invoiceAdress;
 
-
-    itemsToOrder.forEach(function(item){
+    cartItems.forEach(function(item){
       total += (item.price * item.quantity);
-      products.push(item);
+      weightTotal += (item.weight * item.quantity);
     });
-    order.products = products;
+
+    order.products = cartItems;
+    order.total = (total + cart.forwarder.price).toFixed(2);
     order.userID = user;
-    order.total = total.toFixed(2);
     order.orderNo = incrementCounter(Counters,'orderNo');
-    // order.date = new Date();
+    order.forwarder = cart.forwarder;
+
 
     return Orders.insert(order, function (error, result) {
       if (error) console.log(error);
       if (result) {
         console.log('order placed!', order, new Date());
-        cartItems.remove({userID: user});
+        Carts.remove({userID: user});
       }
     });
   },

@@ -1,18 +1,11 @@
 // Template.Order.onCreated(function(){
 //   var self = this;
 //   self.autorun(function(){
-//     self.subscribe('cartItems');
+//     self.subscribe('forwarders');
 //   });
 // });
 
 Template.Order.helpers({
-    btnOff() {
-      itemsInCart = Session.get('Cart-itemCount');
-      if (itemsInCart == 0) {
-        return false
-      }
-      return true
-    },
     Loading() {
       return Session.get('loading');
     },
@@ -23,6 +16,8 @@ Template.Order.helpers({
       return DeliverAdressSchema
     }
 });
+
+
 
 Template.Order.events({
   'click .orderNow': function (event, template) {
@@ -48,9 +43,13 @@ Template.Order.events({
       Meteor.call('placeOrder', deliverAdress, invoiceAdress, function(err,res){
         if (err) {
           Bert.alert( 'Ein Fehler ist aufgetreten!', 'danger', 'fixed-bottom' );
-        } else {
-          FlowRouter.go('thanks');
+        }
+        if (res) {
+          Session.set('Cart-itemTotal', 0);
+          Session.set('Cart-itemCount', 0);
+          Session.set('Cart-weightTotal', 0);
           Session.set('loading', false);
+          FlowRouter.go('thanks');
         }
       });
     } else {
