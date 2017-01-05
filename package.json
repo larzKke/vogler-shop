@@ -1,6 +1,6 @@
 {
     "name": "vogler-shop",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "description": "example webshop",
     "private": true,
     "scripts": {

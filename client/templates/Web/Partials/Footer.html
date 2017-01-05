@@ -1,0 +1,30 @@
+<template name="Footer">
+  <script>
+
+    $(document).ready( function() {
+        // $( 'a' ).imageLightbox();
+
+      var isDesktop = typeof window.orientation === 'undefined';
+        if (isDesktop) {
+          // Add body hook for device specific styles
+          $('body').addClass('desktop');
+          $(window).bind('scroll', function () {
+              if ($(window).scrollTop() > 349) {
+                  $('#nav').addClass('fixed');
+                  $('.first-section').css( "margin-top", "406px" );
+                  $('.open-at').hide();
+              } else {
+                  $('#nav').removeClass('fixed');
+                  $('.first-section').css( "margin-top", "349px" );
+                  $('.open-at').show();
+              }
+          });
+        } else {
+          $('body').addClass('device ');
+              $('#head').css( "position", "absolute" );
+              $('.bioland').css( "position", "absolute" );
+        }
+      });
+
+  </script>
+</template>

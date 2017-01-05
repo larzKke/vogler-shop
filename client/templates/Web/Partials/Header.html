@@ -1,0 +1,26 @@
+<template name="Header">
+  {{#if openAts.count}}
+    <div class="open-at">
+        <h3>Öffnungszeiten:</h3>
+        <div class="ui relaxed divided list"  style="margin:0">
+          {{#each openAts}}
+            <div class="item {{#if special}}open-at-important{{/if}}">{{name}}: {{startTime}} - {{endTime}} Uhr</div>
+          {{/each}}
+        </div>
+    </div>
+  {{/if}}
+  <a class="bioland" href="http://www.bioland.de"><img src="img/bioland.svg" alt="bioland"></a>
+  <header id="head">
+    <div class="logo"></div>
+  </header>
+  <nav id="nav" class="box-shadow">
+    <ul>
+      <li><a href="/">Voglerhof</a></li>
+      <li><a href="#">Biogasanlage</a></li>
+      <li><a href="#">Ausbildung</a></li>
+      <li><a href="/shop">Hofladen</a></li>
+      <li><a href="/ferienwohnung">Ferienwohnung</a></li>
+      <li><a href="#">Kontakt</a></li>
+    </ul>
+  </nav>
+</template>

@@ -1,0 +1,19 @@
+<template name="ShopLayout">
+  <head>
+      <title>VoglerShop</title>
+      <style>
+          .main.container {
+              margin-top: 7em
+          }
+      </style>
+
+  </head>
+  <!-- TODO: COMMENT <body> SEMANTIC-UI MODAL WORKAROUND -->
+  <!-- <body> -->
+      {{> Nav}}
+
+      <div class="ui main container shop-layout">
+          {{> Template.dynamic template=main}}
+      </div>
+  <!-- </body> -->
+</template>

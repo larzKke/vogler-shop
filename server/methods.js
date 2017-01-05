@@ -79,10 +79,39 @@ Meteor.methods({
     return Orders.insert(order, function (error, result) {
       if (error) console.log(error);
       if (result) {
+
+        let user = Meteor.user();
+        Carts.remove({userID: user._id});
+
+        SSR.compileTemplate('htmlEmail', Assets.getText('html-email.html'));
+
+        let emailData = {
+          name: user.profile.name,
+          total: order.total,
+          cartItems: order.products,
+          orderNo: order.orderNo
+        };
+
+        console.log('ORDER: ',order);
+        console.log('EMAILDATA: ',emailData);
+
+        Email.send({
+          to: user.emails[0].address,
+          from: "info@voglerhof.de",
+          subject: "Ihre Bestellung im Voglerhof",
+          html: SSR.render('htmlEmail', emailData),
+        });
         console.log('order placed!', order, new Date());
-        Carts.remove({userID: user});
+
       }
     });
+  },
+
+  removeOrder: function(order){
+    if (order.userID != Meteor.userId()) {
+       throw new Meteor.Error(401, 'Sie sind nicht der Besteller dieser Bestellung!');
+    }
+    return Orders.remove({_id: order._id, userID: order.userID});
   },
 
   removeProduct: function (product) {
@@ -109,6 +138,20 @@ Meteor.methods({
       Carts.update({'cartItems.productID': item.productID},{$pull: {cartItems: item}});
     }
     return Carts.update({'cartItems.productID': item.productID},{$inc: {'cartItems.$.quantity':-1}})
-  }
+  },
+
+  removeOpenAt: function(openAt){
+    if (!isAdmin()) {
+      throw new Meteor.Error(401, 'no Admin');
+    }
+    return OpenAts.remove({_id: openAt._id});
+  },
+
+  // placeBreadReservation: function(openAt){
+  //   if (!Meteor.userId()) {
+  //     throw new Meteor.Error(401, 'not logged in');
+  //   }
+  //   return OpenAts.remove({_id: openAt._id});
+  // }
 
 })

@@ -1,0 +1,29 @@
+<template name="BreadReservationAdmin">
+  <h3>Reservierungen:</h3>
+  <div class="ui grid">
+    <div class="sixteen wide column">
+        {{#if reservations.count}}
+        <table class="ui striped table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Anzahl</th>
+            <th>Reserviert am</th>
+            <th>Reserviert zum</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each reservations}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{amount}}</td>
+            <td>{{formatDate2 createdAt "MM.DD.YY"}}</td>
+            <td>{{formatDate2 reservationFor "MM.DD.YY"}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+        {{/if}}
+    </div>
+  </div>
+</template>

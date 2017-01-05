@@ -1,0 +1,130 @@
+<template name="Account">
+  <h1>Meine Bestellungen</h1>
+  {{#if Template.subscriptionsReady}}
+      {{#if orders.count}}
+        {{#each orders}}
+          <div class="ui segments">
+            <div class="ui segment">
+              <a class="ui blue ribbon label">Bestell-Nr.: {{orderNo}}</a>
+              <a class="ui icon button red small right floated removeOrder" id="{{orderNo}}">
+                <i class="trash outline icon"></i>
+              </a>
+              <p></p>
+              <table class="ui very basic table">
+                <thead>
+                  <tr>
+                    <th>Artikel-Nr.</th>
+                    <th>Name</th>
+                    <th>Preis</th>
+                    <th>Menge</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each products}}
+                  <tr>
+                    <td>{{shopID}}</td>
+                    <td>{{name}}</td>
+                    <td>{{price}}</td>
+                    <td>{{quantity}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+              <div class="ui segment">
+                <div class="ui list">
+                  <div class="item">
+                    <div class="header">Summe:</div>
+                  </div>
+                  <div class="item">
+                    {{total}}
+                  </div>
+                </div>
+                <div class="ui list">
+                  <div class="item">
+                    <div class="header">Datum:</div>
+                  </div>
+                  <div class="item">
+                    {{formatDate date}}
+                  </div>
+                </div>
+                <div class="ui list">
+                  <div class="item">
+                    <div class="header">Versandart:</div>
+                  </div>
+                  <div class="item">
+                    {{forwarder.name}}
+                  </div>
+                </div>
+              </div>
+            <div class="ui horizontal segments">
+              <div class="ui segment">
+                <div class="ui list">
+                  <div class="item">
+                    <div class="header">Lieferadresse:</div>
+                  </div>
+                  <div class="item">
+                    {{deliverAdress.firstName}} {{deliverAdress.lastName}}
+                  </div>
+                  <div class="item">
+                      {{deliverAdress.streetNo}}
+                  </div>
+                  <div class="item">
+                    {{deliverAdress.plz}}
+                  </div>
+                  <div class="item">
+                    {{deliverAdress.city}}
+                  </div>
+                </div>
+              </div>
+              <div class="ui segment">
+                <div class="ui list">
+                  <div class="item">
+                    <div class="header">Rechnungsadresse:</div>
+                  </div>
+                  <div class="item">
+                    {{invoiceAdress.firstName}} {{invoiceAdress.lastName}}
+                  </div>
+                  <div class="item">
+                      {{invoiceAdress.streetNo}}
+                  </div>
+                  <div class="item">
+                    {{invoiceAdress.plz}}
+                  </div>
+                  <div class="item">
+                    {{invoiceAdress.city}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui small modal" id="orderNo{{orderNo}}">
+            <div class="header">
+              Bestellung löschen?
+            </div>
+            <div class="content">
+              <p>Sind Sie sicher das Sie die Bestellung löschen wollen?</p>
+            </div>
+            <div class="actions">
+              <div class="ui negative button">
+                Nein
+              </div>
+                {{> confirmModal}}
+            </div>
+          </div>
+        {{/each}}
+      {{else}}
+        <div class="ui red message">Sie haben keine Bestellungen</div>
+      {{/if}}
+  {{else}}
+    <div class="ui active inline loader"></div>
+  {{/if}}
+</template>
+
+
+<template name="confirmModal">
+  <div class="ui positive right labeled icon button removeOrderConfirm">
+    Ja
+    <i class="checkmark icon"></i>
+  </div>
+</template>

@@ -1,0 +1,19 @@
+<template name="OpenAt">
+  <h3>Öffnungszeiten:</h3>
+  <div class="ui grid">
+    <div class="six wide column">
+        <div class="ui segment">
+          {{> quickForm collection="OpenAts" id="insertOpenAtForm" type="insert"}}
+        </div>
+        {{#if openAts.count}}
+          <div class="ui segment">
+            <div class="ui relaxed divided list">
+              {{#each openAts}}
+                <div class="item">{{name}}: {{startTime}} - {{endTime}} Uhr {{#if special}}<div class="ui small blue label">Spezial</div>{{/if}}<i class="remove circle icon  grey right floated removeOpenAt"></i></div>
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
+    </div>
+  </div>
+</template>

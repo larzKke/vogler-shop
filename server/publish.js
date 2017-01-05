@@ -27,6 +27,14 @@ Meteor.publish('forwarders', function () {
   return Forwarders.find({});
 });
 
+Meteor.publish('open-ats', function () {
+  return OpenAts.find({});
+});
+
+Meteor.publish('bread-reservation', function () {
+  return BreadReservation.find({});
+});
+
 Meteor.publish('singleForwarder', function(id) {
     check(id, String);
     return Forwarders.find({_id: id});

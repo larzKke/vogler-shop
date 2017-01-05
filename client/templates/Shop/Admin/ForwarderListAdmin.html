@@ -1,0 +1,36 @@
+<template name="ForwarderListAdmin">
+    <h3>Versandarten:</h3>
+    {{#if Template.subscriptionsReady}}
+      {{#if forwarder.count}}
+        <table class="ui striped table">
+        <thead>
+          <tr>
+            <th>Artikel-Nr.</th>
+            <th>Name</th>
+            <th>Preis</th>
+            <th>Min. Gewicht</th>
+            <th>Max. Gewicht</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each forwarder}}
+          <tr>
+            <td>{{shopID}}</td>
+            <td>{{name}}</td>
+            <td>{{price}}</td>
+            <td>{{minWeight}}</td>
+            <td>{{maxWeight}}</td>
+            <td><i class="remove circle icon grey floated delete"></i><a href="/forwarder/edit/{{_id}}"><i class="edit icon grey"></i></a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <div class="ui red message">keine Versandart vorhanden</div>
+    {{/if}}
+    <a href="/forwarder/new" class="ui green button edit">Neue Versandart anlegen</a>
+  {{else}}
+    <div class="ui active inline loader"></div>
+  {{/if}}
+</template>

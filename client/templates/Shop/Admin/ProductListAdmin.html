@@ -1,0 +1,34 @@
+<template name="ProductListAdmin">
+    <h3>Lagerware:</h3>
+    {{#if Template.subscriptionsReady}}
+      {{#if products.count}}
+        <table class="ui striped table">
+        <thead>
+          <tr>
+            <th>Artikel-Nr.</th>
+            <th>Name</th>
+            <th>Preis</th>
+            <th>Gewicht (kg)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each products}}
+          <tr>
+            <td>{{shopID}}</td>
+            <td>{{name}}</td>
+            <td>{{price}}</td>
+            <td>{{weight}}</td>
+            <td><i class="remove circle icon grey delete"></i><a href="/product/edit/{{_id}}"><i class="edit icon grey"></i></a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <div class="ui red message">keine Produkte im Lager</div>
+    {{/if}}
+      <a href="/product/new" class="ui green button edit">Neues Produkt anlegen</a>
+  {{else}}
+    <div class="ui active inline loader"></div>
+  {{/if}}
+</template>

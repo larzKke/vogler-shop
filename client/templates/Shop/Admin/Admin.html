@@ -1,0 +1,14 @@
+<template name="Admin">
+      <h2>Administration</h2>
+      <a href="/openAt" class="ui labeled icon button">
+        <i class="calendar icon"></i>
+        Öffnungszeiten
+      </a>
+      <a href="/reservation" class="ui labeled icon button">
+        <i class="browser icon"></i>
+        Reservierungen
+      </a>
+      {{> ProductListAdmin}}
+      {{> ForwarderListAdmin}}
+      <div class="ui hidden divider"></div>
+</template>

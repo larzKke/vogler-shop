@@ -1,0 +1,38 @@
+<template name="BreadReservation">
+  <div class="row">
+      <div class="column">
+          <div class="ui message main">
+              <h1 class="ui header">Brötchen Bestellung</h1>
+              <p>Sie möchten Brötchen vorbestellung und im Hofladen abholen?</p>
+              <a class="ui teal button bread-modal-open">Bestellung aufgeben »</a>
+          </div>
+      </div>
+  </div>
+  <div class="ui modal bread-modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Brötchen Bestellung
+    </div>
+    <div class="image content">
+      <div class="ui  image">
+        <img src="/img/bread.jpg" alt="bread.jpg" class="ui image">
+      </div>
+      <div class="description">
+        <p>Ut imperdiet dignissim feugiat. Phasellus tristique odio eu justo dapibus, nec rutrum ipsum luctus. Ut posuere nec tortor eu ullamcorper. <a href="#link">Etiam pellentesque</a> tincidunt tortor, non sagittis nibh pretium sit amet. Sed neque dolor, blandit eu ornare vel, lacinia porttitor nisi. Vestibulum sit amet diam rhoncus, consectetur enim sit amet, interdum mauris. Praesent feugiat finibus quam, porttitor varius est egestas id.</p>
+        {{> quickForm collection="BreadReservation" id="insertBreadReservation" type="insert" buttonContent="Bestellung aufgeben"}}
+      </div>
+    </div>
+  </div>
+  <div class="ui modal bread-modal-confirm">
+    <i class="close icon"></i>
+    <div class="image content">
+      <div class="description">
+        <h2>Danke!</h2>
+        <h3>Ihre Reservierung wurde erfolgreich abgeschickt!</h3>
+      </div>
+      <div class="ui  image">
+        <img src="/img/bread.jpg" alt="bread.jpg" class="ui image">
+      </div>
+    </div>
+  </div>
+</template>
